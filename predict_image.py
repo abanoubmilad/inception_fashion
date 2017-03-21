@@ -1,3 +1,14 @@
+'''
+
+    predict_image.py
+    predicts class of given image
+    
+    dev   : Abanoub Milad Nassief
+    email : abanoubcs@gmail.com
+
+
+'''
+
 import numpy as np
 import tensorflow as tf
 import sys
@@ -9,8 +20,6 @@ labelsFullPath = '/tmp/output_labels.txt'
 
 
 def create_graph():
-    """Creates a graph from saved GraphDef file and returns a saver."""
-    # Creates graph from saved graph_def.pb.
     with tf.gfile.FastGFile(modelFullPath, 'rb') as f:
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
@@ -26,7 +35,6 @@ def run_inference_on_image():
 
     image_data = tf.gfile.FastGFile(imagePath, 'rb').read()
 
-    # Creates graph from saved GraphDef.
     create_graph()
 
     with tf.Session() as sess:

@@ -1,10 +1,23 @@
+'''
+
+    index_cbir.py
+    extracts features of images located in cats_path
+    and creates and index file located index_path
+    that holds each images and its associated features vector
+    
+    dev   : Abanoub Milad Nassief
+    email : abanoubcs@gmail.com
+
+
+'''
+
 from glob import glob
 import fashion_features
 import json
 import numpy as np
 import tensorflow as tf
 
-PICS_PER_CAT=1000
+PICS_PER_CAT=10000
 cats_path='/home/bono/fashion/women/'
 index_path='/home/bono/fashion_cbir.index'
 cats=glob(cats_path+'/*')
@@ -40,11 +53,13 @@ with tf.Session() as sess:
             tf.logging.fatal(' image does not exist %s', image_path)
         image_data = tf.gfile.FastGFile(image_path, 'rb').read()
         
-        index_file.write(pic+';')
+        index_file.write(image_path+';')
         for item in np.array(sess.run(representation_tensor,{'DecodeJpeg/contents:0': image_data})).flatten():
             index_file.write(" %s" % item)
         index_file.write('\n')
         print 'image num. ',total, ' done'
+        # if total ==3:
+        #     break
         total+=1
     #np.set_printoptions(threshold=np.inf)
 

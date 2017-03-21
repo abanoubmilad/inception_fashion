@@ -1,3 +1,14 @@
+'''
+
+    gallery.py
+    display a main image and list of images underneath
+
+    dev   : Abanoub Milad Nassief
+    email : abanoubcs@gmail.com
+
+
+'''
+
 from Tkinter import *
 from PIL import Image, ImageTk
 
@@ -20,10 +31,10 @@ def reorder_images(canvas_width):
         imgs_per_row=canvas_width/IMAGE_DIM
         img_itr=0
         for label in labels_array:
-            label.grid(row=img_itr/imgs_per_row, column=img_itr%imgs_per_row)
+            label.grid(row=img_itr/imgs_per_row+1, column=img_itr%imgs_per_row)
             img_itr+=1
 
-def show_images(images_array):
+def show_images(images_array, query_image):
     global labels_array
 
     reso=get_screen_resolution()
@@ -46,7 +57,16 @@ def show_images(images_array):
     canvas.create_window((0,0), window=frame, anchor="nw")
 
     
-    canvas.update()
+   # canvas.update()
+
+    image = Image.open(query_image)
+    image.thumbnail((IMAGE_DIM, IMAGE_DIM), Image.ANTIALIAS)
+    photo = ImageTk.PhotoImage(image)
+
+    label = Label(frame, image=photo)
+    label.image = photo
+    label.grid(row=0, column=0)
+    label.config( borderwidth=2, relief="solid")
 
     for image in images_array:
         image = Image.open(image)
