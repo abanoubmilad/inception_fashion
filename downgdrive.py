@@ -30,6 +30,6 @@ def save_response_content(response, destination):
                 f.write(chunk)
 
 if __name__ == "__main__":
-    file_id = '0B7EVK8r0v71pa2EyNEJ0dE9zbU0'
-    destination = 'cats.zip'
+    file_id = ''
+    destination = ''
     download_file_from_google_drive(file_id, destination)
