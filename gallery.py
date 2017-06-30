@@ -17,7 +17,7 @@ import subprocess
 
 labels_array=[]
 last_canvas_width=-1
-IMAGE_DIM=250
+IMAGE_DIM=200
 
 def get_screen_resolution():
     output = subprocess.Popen('xrandr | grep "\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
@@ -28,10 +28,10 @@ def reorder_images(canvas_width):
     global last_canvas_width
     if last_canvas_width != canvas_width and abs(canvas_width-last_canvas_width) >= IMAGE_DIM:
         last_canvas_width = canvas_width
-        imgs_per_row=canvas_width/IMAGE_DIM
+        imgs_per_row=canvas_width/IMAGE_DIM-1
         img_itr=0
         for label in labels_array:
-            label.grid(row=img_itr/imgs_per_row+1, column=img_itr%imgs_per_row)
+            label.grid(row=img_itr/imgs_per_row, column=img_itr%imgs_per_row+1)
             img_itr+=1
 
 def show_images(images_array, query_image):
@@ -40,7 +40,7 @@ def show_images(images_array, query_image):
     reso=get_screen_resolution()
 
     root =Tk()
-    root.wm_title("Inception Fashion")
+    root.wm_title("testing CBIR system using deep learning ... ")
     #root.minsize(width=reso[0]/4*3, height=reso[1]/3*2)
     #root.geometry('{'+reso[0]/2+'}x{'+reso[1]/2+'}'.format(<widthpixels>, <heightpixels>))
   

@@ -1,4 +1,10 @@
 # inception fashion
-a deep learning CBIR in the fashion domain 
+powering deep learning CBIR in the fashion domain 
 
-![logo](pic1.png)
+![](p2.png)
+![](p3.png)
+![](p4.png)
+![](p5.png)
+![](p6.png)
+![](p7.png)
+![](p8.png)
